@@ -25,18 +25,16 @@ if command.startswith(("uv ", "uvx ")):
 # Detect problematic patterns at start of command or after && || ;
 # Pattern: start of string or separator, then the bare command
 patterns = {
-    r"(?:^|&&|\|\||;)\s*python\s": "uv run python",
-    r"(?:^|&&|\|\||;)\s*python3\s": "uv run python",
-    r"(?:^|&&|\|\||;)\s*pip\s+install": "uv add",
-    r"(?:^|&&|\|\||;)\s*pip3\s+install": "uv add",
-    r"(?:^|&&|\|\||;)\s*pytest(?:\s|$)": "uv run pytest",
-    r"(?:^|&&|\|\||;)\s*ruff\s": "uvx ruff",
+    "python": (r"(?:^|&&|\|\||;)\s*python\s", "uv run python"),
+    "python3": (r"(?:^|&&|\|\||;)\s*python3\s", "uv run python"),
+    "pip install": (r"(?:^|&&|\|\||;)\s*pip\s+install", "uv add"),
+    "pip3 install": (r"(?:^|&&|\|\||;)\s*pip3\s+install", "uv add"),
+    "pytest": (r"(?:^|&&|\|\||;)\s*pytest(?:\s|$)", "uv run pytest"),
+    "ruff": (r"(?:^|&&|\|\||;)\s*ruff\s", "uvx ruff"),
 }
 
-for pattern, suggestion in patterns.items():
+for cmd, (pattern, suggestion) in patterns.items():
     if re.search(pattern, command):
-        # Extract the matched command for clearer message
-        cmd = pattern.split(r"\s*")[-1].replace(r"\s", "").replace("(?:", "").replace("|$)", "")
         c.output.exit_block(f"Use '{suggestion}' instead of bare '{cmd}' in uv projects")
 
 c.output.exit_success()

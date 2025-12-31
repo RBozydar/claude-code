@@ -5,6 +5,7 @@
 """PostToolUse hook to remind about test files for new Python modules."""
 
 import os
+from pathlib import Path
 
 from cchooks import PostToolUseContext, create_context
 
@@ -27,7 +28,7 @@ if basename.startswith("test_") or basename in ("__init__.py", "conftest.py"):
     c.output.exit_success()
 
 # Skip if file is already in a tests directory
-if "/tests/" in file_path or "/test/" in file_path:
+if "tests" in Path(file_path).parts or "test" in Path(file_path).parts:
     c.output.exit_success()
 
 # Check if corresponding test file exists
