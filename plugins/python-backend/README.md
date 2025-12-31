@@ -22,7 +22,7 @@ claude plugin add ./plugins/core
 
 ## Components
 
-### Agents (3)
+### Agents (5)
 
 **Review Agents:**
 
@@ -41,6 +41,18 @@ claude plugin add ./plugins/core
   - Reproducibility checks
   - LLM integration patterns
   - Model deployment readiness
+
+**External LLM Agents:**
+
+- `gemini-brainstorm` - Second opinion from Gemini
+  - Architecture and design decisions
+  - Surfaces blind spots through model diversity
+  - Compares findings with Claude
+
+- `gemini-reviewer` - Alternative code review from Gemini
+  - Different perspective on code quality
+  - Highlights consensus and differences
+  - Requires Gemini CLI installed
 
 ### Commands (2)
 
@@ -103,3 +115,4 @@ When used with the core plugin:
 - pytest (for `/pytest-runner`)
 - mypy or pyright (for `/type-check`)
 - uv, poetry, or pip for package management
+- Gemini CLI (optional, for Gemini agents)
