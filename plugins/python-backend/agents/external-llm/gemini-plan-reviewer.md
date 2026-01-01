@@ -38,7 +38,7 @@ If given a file path, read it. Gather relevant codebase context from CLAUDE.md.
 ```bash
 PLAN_CONTENT="[plan content here]"
 
-gemini --sandbox --output-format text --model gemini-3.0-pro-preview "$(cat <<'EOF'
+gemini --sandbox --output-format text --model gemini-3.0-pro-preview "$(cat <<EOF
 You are a senior software architect reviewing a plan/specification.
 
 Review for:
